@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <TextView
+            android:id="@+id/text_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textAllCaps="true"
+            android:textColor="#3a5d8c"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="Name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text_view_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="#025548910"
+            android:textColor="#9f005c9c" />
+
+        <TextView
+            android:id="@+id/text_view_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/text_view_name"
+            android:layout_below="@id/text_view_name"
+            android:layout_marginTop="20dp"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            tools:text="Location" />
+
+        <TextView
+            android:id="@+id/text_view_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_location"
+            android:layout_marginTop="20dp"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            tools:text="20-03-2018" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/text_view_start"
+            android:layout_marginRight="10dp"
+            android:background="#03aef0"
+            android:text="4371"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/text_view_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#ebf3ff"
+            android:textColor="#f07e01"
+            android:textSize="15sp"
+            tools:text="Selesai pada 20-03-2018" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import adel.co.asyst.test.retrofit.ApiClient;
+import adel.co.asyst.test.retrofit.ApiServices;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText unameED, passED;
@@ -24,6 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loginbtn = findViewById(R.id.button_login);
 
         loginbtn.setOnClickListener(this);
+        getDataLogin();
+    }
+
+    private void getDataLogin() {
+        ApiServices apiServices = ApiClient.newInstance(getApplicationContext()).create(ApiServices.class);
+
+        // Call<LoginRequest> call = apiServices.pgnlogin();
     }
 
     @Override

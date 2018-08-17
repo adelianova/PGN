@@ -1,14 +1,16 @@
 package adel.co.asyst.test.retrofit;
 
+import adel.co.asyst.test.model.LoginModel;
 import adel.co.asyst.test.model.PgnModel;
+import adel.co.asyst.test.retrofit.request.LoginRequest;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface ApiServices {
-    @GET("Login/getProfileInfo")
-    Call<PgnModel> pgnlogin(@Body PgnModel login);
+    @POST("Login/getProfileInfo")
+    Call<LoginModel> pgnlogin(@Body LoginRequest loginRequest);
 
-    @GET("Task/getAllTask")
+    @POST("Task/getAllTask")
     Call<PgnModel> pgnTask(@Body PgnModel task);
 }

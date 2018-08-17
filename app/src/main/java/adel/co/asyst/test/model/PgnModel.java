@@ -1,8 +1,5 @@
 package adel.co.asyst.test.model;
 
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-
 public class PgnModel {
     String customer_name;
     String customer_address;
@@ -35,9 +32,5 @@ public class PgnModel {
         return customer_id;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public MyViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
+
 }

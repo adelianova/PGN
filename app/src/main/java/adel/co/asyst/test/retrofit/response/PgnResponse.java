@@ -14,11 +14,23 @@ public class PgnResponse {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getMessage() {
         return message;
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public ArrayList<PgnModel> getData() {
         return data;
+    }
+
+    public void setData(ArrayList<PgnModel> data) {
+        this.data = data;
     }
 }

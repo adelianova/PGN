@@ -14,4 +14,12 @@ public class LoginRequest {
     public LoginModel getParam() {
         return param;
     }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public void setParam(LoginModel param) {
+        this.param = param;
+    }
 }

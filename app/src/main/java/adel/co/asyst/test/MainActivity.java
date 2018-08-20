@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText unameED, passED;
     Button loginbtn;
     SessionUtils sessionUtils;
-
     String user;
     String pass;
     @Override
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void getDataLogin() {
         LoginRequest loginRequest = new LoginRequest();
-        LoginModel login = new LoginModel();
+        final LoginModel login = new LoginModel();
         user = unameED.getText().toString();
         pass = passED.getText().toString();
         loginRequest.setMethod("getProfileInfo");
@@ -68,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     sessionUtils.saveLogin(user, pass);
                     sessionUtils.saveIsLogin(Constant.ISLOGIN, true);
                     Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                    intent.putExtra(Constant.KEY_USERNAME, user);
                     startActivity(intent);
+
                     finish();
                 }
             }

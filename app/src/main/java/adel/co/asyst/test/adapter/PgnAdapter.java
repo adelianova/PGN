@@ -12,20 +12,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import adel.co.asyst.test.R;
-import adel.co.asyst.test.model.PgnModel;
+import adel.co.asyst.test.model.TaskModel;
+import adel.co.asyst.test.utility.DateUtils;
 
 public class PgnAdapter extends RecyclerView.Adapter<PgnAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<PgnModel> mListpgn;
+    ArrayList<TaskModel> mListpgn;
     onItemClickListener mListener;
 
-    public PgnAdapter(Context context, ArrayList<PgnModel> listTask) {
-        this.mContext = context;
-        this.mListpgn = listTask;
-    }
-
-    public PgnAdapter(Context context, ArrayList<PgnModel> listTask, onItemClickListener listener) {
+    public PgnAdapter(Context context, ArrayList<TaskModel> listTask, onItemClickListener listener) {
         this.mContext = context;
         this.mListpgn = listTask;
         this.mListener = listener;
@@ -43,19 +39,24 @@ public class PgnAdapter extends RecyclerView.Adapter<PgnAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final PgnModel pgnModel = mListpgn.get(position);
+        final TaskModel taskModel = mListpgn.get(position);
 
-        holder.taskidtv.setText(pgnModel.getTask_id());
-        holder.customeridtv.setText(pgnModel.getCustomer_id());
-        holder.nametv.setText(pgnModel.getCustomer_name());
-        holder.locationtv.setText(pgnModel.getCustomer_address());
-        holder.starttv.setText(pgnModel.getStartDate());
-        holder.finishtv.setText(pgnModel.getFinishDate());
-
+        holder.taskidtv.setText(taskModel.getTask_id());
+        holder.customeridtv.setText("#" + taskModel.getCustomer_id());
+        holder.nametv.setText(taskModel.getCustomer_name());
+        holder.locationtv.setText(taskModel.getCustomer_address());
+        holder.starttv.setText(taskModel.getStartDate());
+        holder.starttv.setText(DateUtils.formatDate("yyyy-MM-dd", "EEEE, dd MMMM yyyy", taskModel.getStartDate()));
+        if (taskModel.getFinishDate() == null) {
+            holder.finishtv.setVisibility(View.GONE);
+        } else {
+            holder.finishtv.setVisibility(View.VISIBLE);
+            holder.finishtv.setText("Selesai " + DateUtils.formatDate("yyyy-MM-dd", "dd MMMM yyyy", taskModel.getFinishDate()));
+        }
         holder.taskCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onItemClickListener(pgnModel);
+                mListener.onItemClickListener(taskModel);
             }
         });
     }
@@ -67,7 +68,7 @@ public class PgnAdapter extends RecyclerView.Adapter<PgnAdapter.MyViewHolder> {
     }
 
     public interface onItemClickListener {
-        void onItemClickListener(PgnModel pgnModel);
+        void onItemClickListener(TaskModel taskModel);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

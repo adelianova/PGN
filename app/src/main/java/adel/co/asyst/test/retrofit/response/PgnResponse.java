@@ -2,13 +2,13 @@ package adel.co.asyst.test.retrofit.response;
 
 import java.util.ArrayList;
 
-import adel.co.asyst.test.model.PgnModel;
+import adel.co.asyst.test.model.TaskModel;
 
 public class PgnResponse {
 
     String status;
     String message;
-    ArrayList<PgnModel> data;
+    ArrayList<TaskModel> data;
 
     public String getStatus() {
         return status;
@@ -26,11 +26,11 @@ public class PgnResponse {
         this.message = message;
     }
 
-    public ArrayList<PgnModel> getData() {
+    public ArrayList<TaskModel> getData() {
         return data;
     }
 
-    public void setData(ArrayList<PgnModel> data) {
+    public void setData(ArrayList<TaskModel> data) {
         this.data = data;
     }
 }

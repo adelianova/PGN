@@ -9,9 +9,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content"
+        android:padding="5dp">
 
         <TextView
+            android:layout_margin="10dp"
             android:id="@+id/text_view_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/text_view_name"
             android:layout_below="@id/text_view_name"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textAllCaps="true"
             android:textColor="#000000"
             android:textSize="15sp"
@@ -52,19 +54,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_view_location"
             android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
             android:textColor="#000000"
             android:textSize="15sp"
             tools:text="20-03-2018" />
 
         <TextView
+            android:id="@+id/text_view_task_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:id="@+id/text_view_task_id"
             android:layout_alignTop="@+id/text_view_start"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="0dp"
             android:background="#03aef0"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:text="4371"
             android:textColor="#FFFFFF" />
 
@@ -72,7 +78,12 @@
             android:id="@+id/text_view_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/text_view_start"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:background="#ebf3ff"
             android:textColor="#f07e01"
             android:textSize="15sp"

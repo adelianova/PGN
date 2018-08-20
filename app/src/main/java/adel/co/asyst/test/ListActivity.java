@@ -1,7 +1,9 @@
 package adel.co.asyst.test;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +18,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import adel.co.asyst.test.adapter.PgnAdapter;
-import adel.co.asyst.test.model.LoginModel;
 import adel.co.asyst.test.model.PgnModel;
+import adel.co.asyst.test.model.TaskModel;
 import adel.co.asyst.test.retrofit.ApiClient;
 import adel.co.asyst.test.retrofit.ApiServices;
+import adel.co.asyst.test.retrofit.request.PgnRequest;
 import adel.co.asyst.test.retrofit.response.PgnResponse;
 import adel.co.asyst.test.utility.Constant;
 import adel.co.asyst.test.utility.SessionUtils;
@@ -32,7 +35,7 @@ public class ListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     PgnAdapter pgnAdapter;
     ProgressBar progressBar;
-    ArrayList<PgnModel> listTask = new ArrayList<>();
+    ArrayList<TaskModel> listTask = new ArrayList<>();
     boolean isLoading = false;
     SessionUtils sessionUtils;
 
@@ -48,11 +51,10 @@ public class ListActivity extends AppCompatActivity {
         sessionUtils = new SessionUtils(this);
         pgnAdapter = new PgnAdapter(this, listTask, new PgnAdapter.onItemClickListener() {
             @Override
-            public void onItemClickListener(PgnModel pgnModel) {
-                Toast.makeText(getApplicationContext(), pgnModel.getCustomer_name(), Toast.LENGTH_SHORT).show();
+            public void onItemClickListener(TaskModel taskModel) {
+                Toast.makeText(getApplicationContext(), taskModel.getCustomer_name(), Toast.LENGTH_SHORT).show();
             }
         });
-        getDataTask();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -65,19 +67,24 @@ public class ListActivity extends AppCompatActivity {
                 }
             }
         });
+        getDataTask();
         recyclerView.setAdapter(pgnAdapter);
     }
 
     private void getDataTask() {
-        LoginModel loginModel = new LoginModel();
+        PgnModel pgnModel = new PgnModel();
+        PgnRequest pgnRequest = new PgnRequest();
+        pgnRequest.setMethod("getAllTask");
+        pgnModel.setUsername(sessionUtils.loadUsername());
+        pgnRequest.setParam(pgnModel);
         ApiServices apiServices = ApiClient.newInstance(getApplicationContext()).create(ApiServices.class);
-        Call<PgnResponse> call = apiServices.pgnTask(loginModel);
+        Call<PgnResponse> call = apiServices.pgnTask(pgnRequest);
         call.enqueue(new Callback<PgnResponse>() {
             @Override
             public void onResponse(Call<PgnResponse> call, Response<PgnResponse> response) {
                 progressBar.setVisibility(View.INVISIBLE);
-                if (response.body() != null) {
-                    if (response.body().getStatus() == "success") {
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+                    if (response.body().getData().size() > 0) {
                         listTask.addAll(response.body().getData());
                         pgnAdapter.notifyDataSetChanged();
                     }
@@ -106,10 +113,18 @@ public class ListActivity extends AppCompatActivity {
 
         switch (id) {
             case R.id.logout_menu:
-                sessionUtils.saveIsLogin(Constant.ISLOGIN, false);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
+
+                AlertDialog.Builder alertDia = new AlertDialog.Builder(this);
+                alertDia.setTitle("Confirmation Logout").setCancelable(false).setMessage("Are you sure?").
+                        setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                sessionUtils.saveIsLogin(Constant.ISLOGIN, false);
+                                Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }).setNegativeButton("No", null).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
